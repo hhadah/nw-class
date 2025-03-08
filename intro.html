@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Urban Economics</title>
+    <title>The Economics of Crime</title>
     <meta charset="utf-8" />
     <meta name="author" content="Hussain Hadah (he/him)" />
     <meta name="date" content="2025-03-08" />
@@ -31,10 +31,7 @@
 class: center, middle, inverse, title-slide
 
 .title[
-# Urban Economics
-]
-.subtitle[
-## The Economics of Crime: An Overview
+# The Economics of Crime
 ]
 .author[
 ### Hussain Hadah (he/him)
@@ -46,9 +43,16 @@ class: center, middle, inverse, title-slide
 ---
 
 layout: true
-&lt;div style="position: absolute;left:20px;bottom:5px;color:black;font-size: 12px;"&gt;Hussain Hadah (he/him) (Tulane) | The Economics of Crime: An Overview | 08 March 2025&lt;/div&gt;
+&lt;div style="position: absolute;left:20px;bottom:5px;color:black;font-size: 12px;"&gt;Hussain Hadah (he/him) (Tulane) |  | 08 March 2025&lt;/div&gt;
 
-&lt;!--- The Economics of Crime: An Overview | 08 March 2025--&gt;
+&lt;!---  | 08 March 2025--&gt;
+
+---
+
+class: title-slide
+background-position: 10% 90%, 100% 50%
+background-size: 160px, 50% 100%
+background-color: #0148A4
 
 
 
@@ -77,6 +81,69 @@ layout: true
     }
 
 &lt;/style&gt;
+
+# .text-shadow[.white[Outline for Today]]
+
+&lt;ol&gt;
+    &lt;li&gt;&lt;h4 class="white"&gt;Terminology&lt;/h4&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;h4 class="white"&gt;Issues in Causal Inference in Crime Economics&lt;/h4&gt;&lt;/li&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;h4 class="white"&gt;The Contribution of Economist to the Study of Crime&lt;/h4&gt;&lt;/li&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;h4 class="white"&gt;The Rational Criminal Model&lt;/h4&gt;&lt;/li&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;h4 class="white"&gt;What do Economists Know About Crime?&lt;/h4&gt;&lt;/li&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;h4 class="white"&gt;Applications of Judge Fixed Effects&lt;/h4&gt;&lt;/li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+---
+class: segue-yellow
+background-size: 20%
+background-position: 95% 95%
+
+# Terminology
+
+---
+## Some Terms that are Helpful to Know
+
+- These terms will come up in the practice questions you’ll do today, in the course, and in economics in general.
+1. Treatment variation
+1. Exogenous
+1. Endogenous
+1. External validity
+
+---
+## Treatment Variation
+
+- This term often comes up in empirical research that estimates causal effects.
+- Treatment variation refers to the variation in X that you are using to identify the causal effect of X on Y.
+- E.g., the variation in the timing and location of MDPs (as in GHM).
+- E.g., the increase in police officer hiring that occurs before elections (this is the variation used in Levitt, 1997).
+- E.g., the randomly-assigned change in police enforcement by location (as in Dur and Voolaard, 2019).
+
+---
+## Exogenous
+
+- If a variation is exogenous, then it is not a function of other factors.
+- It is not a function of other variable in the economic/statistical model.
+- If something is exogenous, you can think of it being random.
+- We ideally want to use treatment variation that is exogenous. 
+- The gold standard would be randomization `\(\rightarrow\)` randomized treatment (e.g., randomizing police) would be strictly exogenous since treatment status does not depend on anything.
+
+---
+## Endogenous
+
+- The opposite of exogenous.
+- More specifically, if something is endogenous, it means it is a function of (it depends on, it is endogenous to) something else.
+- E.g., police allocation is endogenous to crime (unless we find some random or quasi-random variation to use).
+- E.g., state adoption of tax incentives for the film industry may be endogenous to the size of the existing film industry (larger existing film industry = more likely to adopt an incentive)
+
+---
+## Endogenous vs. Exogenous
+
+- The key question is how exogenous/endogenous the treatment variation is. 
+- It’s not black and white where it is always clearly one or the other.
+- Most treatment variation outside of an experiment lies on a spectrum between fully exogenous and strongly endogenous.
+- There is no way to know or to test of treatment variation is endogenous.
+- Determining how endogenous it is requires thinking critically about the factors that affect the treatment variation.
+- For example, is there something non-random about the change in policing that is used in the paper? Could this non-randomness cause bias by creating a feedback loop (like the crime `\(\leftrightarrow\)` police feedback loop shown earlier)?
 
 ---
 class: segue-yellow
@@ -186,58 +253,6 @@ Allocation of Police Forces after a Terrorist Attack.” American Economic Revie
 of Environmental Economics and Management, 93: 208–220.
 - **Cheng, Cheng, and Wei Long. 2018.** “Improving police services: Evidence from the French quarter
 task force.” Journal of Public Economics, 164: 1–18.
-
----
-class: segue-yellow
-background-size: 20%
-background-position: 95% 95%
-
-# Terminology
-
----
-## Some Terms that are Helpful to Know
-
-- These terms will come up in the practice questions you’ll do today, in the course, and in economics in general.
-1. Treatment variation
-1. Exogenous
-1. Endogenous
-1. External validity
-
----
-## Treatment Variation
-
-- This term often comes up in empirical research that estimates causal effects.
-- Treatment variation refers to the variation in X that you are using to identify the causal effect of X on Y.
-- E.g., the variation in the timing and location of MDPs (as in GHM).
-- E.g., the increase in police officer hiring that occurs before elections (this is the variation used in Levitt, 1997).
-- E.g., the randomly-assigned change in police enforcement by location (as in Dur and Voolaard, 2019).
-
----
-## Exogenous
-
-- If a variation is exogenous, then it is not a function of other factors.
-- It is not a function of other variable in the economic/statistical model.
-- If something is exogenous, you can think of it being random.
-- We ideally want to use treatment variation that is exogenous. 
-- The gold standard would be randomization `\(\rightarrow\)` randomized treatment (e.g., randomizing police) would be strictly exogenous since treatment status does not depend on anything.
-
----
-## Endogenous
-
-- The opposite of exogenous.
-- More specifically, if something is endogenous, it means it is a function of (it depends on, it is endogenous to) something else.
-- E.g., police allocation is endogenous to crime (unless we find some random or quasi-random variation to use).
-- E.g., state adoption of tax incentives for the film industry may be endogenous to the size of the existing film industry (larger existing film industry = more likely to adopt an incentive)
-
----
-## Endogenous vs. Exogenous
-
-- The key question is how exogenous/endogenous the treatment variation is. 
-- It’s not black and white where it is always clearly one or the other.
-- Most treatment variation outside of an experiment lies on a spectrum between fully exogenous and strongly endogenous.
-- There is no way to know or to test of treatment variation is endogenous.
-- Determining how endogenous it is requires thinking critically about the factors that affect the treatment variation.
-- For example, is there something non-random about the change in policing that is used in the paper? Could this non-randomness cause bias by creating a feedback loop (like the crime `\(\leftrightarrow\)` police feedback loop shown earlier)?
 
 ---
 class: segue-yellow
@@ -633,20 +648,7 @@ background-position: 95% 95%
 # What do Economists Know About Crime?
 
 ---
-### Key points in: Dills, Angela K., Jeffrey A. Miron, and Garrett Summers. 2010 
 
-.blockquote[
-
- Abstract: In this paper we evaluate what economists have learned [since about 2010] about the determinants of crime. We base our evaluation on two  kinds of evidence: an examination of aggregate data over long time periods and across countries, and a critical review of the literature. 
-
-
-We argue that economists know little about the empirically relevant determinants of crime. Even hypotheses that find some support in U.S. data for recent decades are inconsistent with data over longer horizons or across countries. This conclusion applies both to policy variables like arrest rates or capital punishment and to less conventional factors such as abortion or gun laws. 
-
-
-The hypothesis that drug prohibition generates violence, however, is generally consistent with the long times-series and cross-country facts. This analysis is also consistent with a broader perspective in which government policies that affect the nature and amount of dispute resolution play an important role in determining violence.
-]
-
----
 ## Overview of Economics Research
 
 - Economists have devoted significant effort to determining to what extent the Becker model or crime (“rational criminal” model, from earlier) is empirical valid, and to what extent factors like policing, income levels, etc., affect crime rates.
@@ -2370,7 +2372,6 @@ jive guilt (jail3= $judge_pre) possess robbery DUI1st drugSell aggAss $demo $pri
 
 ### Find a crime paper with a dataset to use
 
---
 #### I suggest finding papers from the American Economic Review since they tend to publish papers with data
 
 ### Use the code that I gave in the class as a reference
