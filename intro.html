@@ -4,11 +4,13 @@
     <title>Urban Economics</title>
     <meta charset="utf-8" />
     <meta name="author" content="Hussain Hadah (he/him)" />
-    <meta name="date" content="2025-03-06" />
+    <meta name="date" content="2025-03-08" />
     <script src="intro_files/header-attrs/header-attrs.js"></script>
     <link href="intro_files/remark-css/default.css" rel="stylesheet" />
     <link href="intro_files/panelset/panelset.css" rel="stylesheet" />
     <script src="intro_files/panelset/panelset.js"></script>
+    <script src="intro_files/kePrint/kePrint.js"></script>
+    <link href="intro_files/lightable/lightable.css" rel="stylesheet" />
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         TeX: { equationNumbers: { autoNumber: "AMS" } },
@@ -38,17 +40,15 @@ class: center, middle, inverse, title-slide
 ### Hussain Hadah (he/him)
 ]
 .date[
-### 06 March 2025
+### 08 March 2025
 ]
 
 ---
 
 layout: true
-&lt;div style="position: absolute;left:20px;bottom:5px;color:black;font-size: 12px;"&gt;Hussain Hadah (he/him) (Tulane) | The Economics of Crime: An Overview | 06 March 2025&lt;/div&gt;
+&lt;div style="position: absolute;left:20px;bottom:5px;color:black;font-size: 12px;"&gt;Hussain Hadah (he/him) (Tulane) | The Economics of Crime: An Overview | 08 March 2025&lt;/div&gt;
 
-&lt;!--- The Economics of Crime: An Overview | 06 March 2025--&gt;
-
----
+&lt;!--- The Economics of Crime: An Overview | 08 March 2025--&gt;
 
 
 
@@ -75,6 +75,7 @@ layout: true
     .remark-slide thead, .remark-slide tr:nth-child(n) {
         background-color: white;
     }
+
 &lt;/style&gt;
 
 ---
@@ -682,73 +683,6 @@ background-image: url("assets/TulaneLogo.svg")
 background-size: 20%
 background-position: 95% 95%
 
-# Stylized Facts about Crime in the US (from Pew)
-
----
-## Most Common Crime and Crime Trends in the US
-
-.pull-left[
-&lt;img src="intro_files/figure-html/img6-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-]
-
-.pull-right[
-&lt;img src="intro_files/figure-html/img7-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-]
-
----
-## Perceived Crime and Reported Crime
-
-.pull-left[
-&lt;img src="intro_files/figure-html/img8-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-]
-
-.pull-right[
-&lt;img src="intro_files/figure-html/img9-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-]
-
-
----
-## Reported and Cleared Crime
-
-.pull-left[
-&lt;img src="intro_files/figure-html/img10-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-]
-
-.pull-right[
-&lt;img src="intro_files/figure-html/img11-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-]
-
----
-## Crime Rates by State
-
-&lt;img src="intro_files/figure-html/img12-1.png" width="70%" style="display: block; margin: auto;" /&gt;
-
----
-## Crime Rate in Louisiana
-
-&lt;img src="intro_files/figure-html/img13-1.png" width="70%" style="display: block; margin: auto;" /&gt;
-
----
-## Crime Rate in New Orleans
-
-&lt;img src="intro_files/figure-html/img14-1.png" width="70%" style="display: block; margin: auto;" /&gt;
-
----
-## Crime Index by Country
-
-&lt;img src="intro_files/figure-html/img15-1.png" width="70%" style="display: block; margin: auto;" /&gt;
-
----
-## Prison Population by Country
-
-&lt;img src="intro_files/figure-html/img16-1.png" width="70%" style="display: block; margin: auto;" /&gt;
-
----
-class: segue-yellow
-background-image: url("assets/TulaneLogo.svg")
-background-size: 20%
-background-position: 95% 95%
-
 # Overview of Economics Research – Past Dills, Miron, and Summers (2010)
 
 ---
@@ -818,15 +752,84 @@ background-position: 95% 95%
 
 # Applications of Judge Fixed Effects
 
+
 ---
-## Stevenson (2018)
+## Endogenous Relationship Between Pre-Trial Detention and Case Outcome
+
+We want to estimate the effect of pre-trial detention (\(D_i\)) on case outcome (\(Y_i\)). The naïve OLS model is:
+
+$$
+Y_i = \beta_0 + \beta_1 D_i + X_i \gamma + \varepsilon_i
+$$
+
+where:
+- `\(Y_i\)` is the case outcome (e.g., conviction, sentence length),
+- `\(D_i\)` is an indicator for pre-trial detention,
+- `\(X_i\)` is a vector of control variables (e.g., defendant characteristics),
+- `\(\varepsilon_i\)` is the error term.
+
+However, `\(D_i\)` is endogenous because unobserved factors (e.g., case severity, defendant behavior) may influence both detention and outcome, leading to omitted variable bias:
+
+$$
+\mathbb{E}[\varepsilon_i | D_i] \neq 0
+$$
+
+---
+## Using Judge Stringency as an Instrument (2SLS Approach)
+
+To address endogeneity, we use an instrumental variable (IV): judge stringency (\(Z_i\)), which measures the propensity of a randomly assigned judge to detain defendants.
+
+### First Stage:
+
+$$
+D_i = \pi_0 + \pi_1 Z_i + X_i \delta + \nu_i
+$$
+
+where:
+- `\(Z_i\)` is the instrument (e.g., judge's historical detention rate),
+-  `\(\pi_1\)` captures the relationship between judge stringency and detention,
+-  `\(\nu_i\)` is the first-stage error term.
+
+---
+## Using Judge Stringency as an Instrument (2SLS Approach) (cont.)
+
+### Second Stage:
+
+$$
+Y_i = \alpha_0 + \alpha_1 \hat{D}_i + X_i \theta + \eta_i
+$$
+
+where:
+- `\(\hat{D}_i\)` is the predicted probability of detention from the first stage,
+- $\alpha_1 $is the causal effect of detention on case outcome.
+
+For validity:
+1. **Relevance**:  `\(Z_i\)`  strongly predicts  `\(D_i\)`  (`\(\pi_1 \neq 0\)`).
+2. **Exogeneity**: `\(Z_i\)` affects `\(Y_i\)` only through $D_i $ and not through other channels.
+
+---
+## We will use data from Stevenson (2018) to apply this method
+
+### Let us set up the environment and upload the data
 
 .panelset[
 .panel[.panel-name[R Code]
 
 
 ``` r
-# ... r code ...
+## Load and install the packages that we'll be using today
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load(tidyverse, haven, estimatr, lfe, SteinIV)
+
+read_data &lt;- function(df)
+{
+  full_path &lt;- paste("https://raw.githubusercontent.com/hhadah/nw-class/main/", 
+                     df, sep = "")
+  df &lt;- read_dta(full_path)
+  return(df)
+}
+
+judge &lt;- read_data("judge_fe.dta")
 ```
 ]
 
@@ -834,7 +837,21 @@ background-position: 95% 95%
 
 
 ``` python
-# ... python code ...
+import numpy as np 
+import pandas as pd 
+import statsmodels.api as sm 
+import statsmodels.formula.api as smf 
+from janitor import glimpse
+from itertools import combinations 
+import plotnine as p
+
+# read data
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
+def read_data(file): 
+    return pd.read_stata("https://raw.githubusercontent.com/hhadah/nw-class/main/" + file)
+judge = read_data("judge_fe.dta")
+judge['bailDate'] = (judge['bailDate'] - pd.to_datetime('1970-01-01')).dt.days.values
 ```
 
 ]
@@ -842,11 +859,1523 @@ background-position: 95% 95%
 .panel[.panel-name[stata Code]
 
 ```
-# ... stata code ...
+use https://raw.githubusercontent.com/hhadah/nw-class/main/judge_fe.dta, clear
+
 ```
 
 ]
 ]
+
+
+---
+## We will use data from Stevenson (2018) to apply this method
+
+### Let us take a look at the data
+
+.panelset[
+.panel[.panel-name[R Code]
+
+
+``` r
+judge |&gt; 
+  glimpse()
+```
+
+```
+## Rows: 331,971
+## Columns: 50
+## $ priorCases    &lt;dbl&gt; 0, 0, 5, 0, 0, 6, 1, 9, 5, 0, 1, 0, 5, 4, 0, 9, 0, 7, 1,~
+## $ prior_felChar &lt;dbl&gt; 0, 0, 4, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0,~
+## $ prior_guilt   &lt;dbl&gt; 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0, 0, 3, 0,~
+## $ fel           &lt;dbl&gt; 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0,~
+## $ mis           &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,~
+## $ sum           &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,~
+## $ F1            &lt;dbl&gt; 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0,~
+## $ F2            &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,~
+## $ F3            &lt;dbl&gt; 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0,~
+## $ F             &lt;dbl&gt; 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,~
+## $ M1            &lt;dbl&gt; 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0,~
+## $ M2            &lt;dbl&gt; 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1,~
+## $ M3            &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,~
+## $ M             &lt;dbl&gt; 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0,~
+## $ robbery       &lt;dbl&gt; 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,~
+## $ aggAss        &lt;dbl&gt; 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,~
+## $ possess       &lt;dbl&gt; 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0,~
+## $ drugSell      &lt;dbl&gt; 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,~
+## $ DUI1st        &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,~
+## $ guilt         &lt;dbl&gt; 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0,~
+## $ bailDate      &lt;date&gt; 2006-09-13, 2006-09-13, 2006-09-13, 2006-09-13, 2006-09~
+## $ white         &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1,~
+## $ black         &lt;dbl&gt; 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0,~
+## $ age           &lt;dbl&gt; 24.98904, 15.60822, 25.92329, 37.74520, 74.47398, 38.547~
+## $ male          &lt;dbl&gt; 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,~
+## $ onePrior      &lt;dbl&gt; 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1,~
+## $ threePriors   &lt;dbl&gt; 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0,~
+## $ priorWI5      &lt;dbl&gt; 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1,~
+## $ jail3         &lt;dbl&gt; 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1,~
+## $ morning       &lt;dbl&gt; 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0,~
+## $ evening       &lt;dbl&gt; 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1,~
+## $ grave         &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,~
+## $ weekend       &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,~
+## $ day           &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,~
+## $ day2          &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,~
+## $ day3          &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,~
+## $ t1            &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,~
+## $ t2            &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,~
+## $ t3            &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,~
+## $ t4            &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,~
+## $ t5            &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,~
+## $ t6            &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,~
+## $ judge_pre_1   &lt;dbl&gt; 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0,~
+## $ judge_pre_2   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,~
+## $ judge_pre_3   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,~
+## $ judge_pre_4   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,~
+## $ judge_pre_5   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,~
+## $ judge_pre_6   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,~
+## $ judge_pre_7   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,~
+## $ judge_pre_8   &lt;dbl&gt; 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1,~
+```
+]
+
+.panel[.panel-name[Python Code]
+
+
+``` python
+judge.glimpse()
+```
+
+]
+
+.panel[.panel-name[stata Code]
+
+```
+desc judge_fe
+```
+
+]
+]
+
+
+
+---
+## Prepare variables for regressions
+
+.scroll-output[
+.panelset[
+.panel[.panel-name[R Code]
+
+
+``` r
+#grouped variable names from the data set
+judge_pre &lt;- judge %&gt;% 
+  select(starts_with("judge_")) %&gt;% 
+  colnames() %&gt;% 
+  subset(., . != "judge_pre_8") %&gt;% # remove one for colinearity
+  paste(., collapse = " + ")
+
+demo &lt;- judge %&gt;% 
+  select(black, age, male, white) %&gt;% 
+  colnames() %&gt;% 
+  paste(., collapse = " + ")
+
+off &lt;- judge %&gt;% 
+  select(fel, mis, sum, F1, F2, F3, M1, M2, M3, M) %&gt;% 
+  colnames() %&gt;% 
+  paste(., collapse = " + ")
+
+prior &lt;- judge %&gt;% 
+  select(priorCases, priorWI5, prior_felChar, 
+         prior_guilt, onePrior, threePriors) %&gt;% 
+  colnames() %&gt;% 
+  paste(., collapse = " + ")
+
+control2 &lt;- judge %&gt;%
+  mutate(bailDate = as.numeric(bailDate)) %&gt;% 
+  select(day, day2, bailDate, 
+         t1, t2, t3, t4, t5) %&gt;% # all but one time period for colinearity
+  colnames() %&gt;% 
+  paste(., collapse = " + ")
+
+#formulas used in the OLS
+min_formula &lt;- as.formula(paste("guilt ~ jail3 + ", control2))
+max_formula &lt;- as.formula(paste("guilt ~ jail3 + possess + robbery + DUI1st + drugSell + aggAss",
+                                demo, prior, off, control2, sep = " + "))
+```
+]
+
+.panel[.panel-name[Python Code]
+
+
+``` python
+# grouped variable names from the data set
+judge_pre = "+".join(judge.columns[judge.columns.str.contains('^judge_pre_[1-7]')])
+demo = "+".join(['black', 'age', 'male', 'white'])
+off = "+".join(['fel', 'mis', 'sum', 'F1', 'F2', 'F3', 'M1', 'M2', 'M3', 'M'])
+prior = "+".join(['priorCases', 'priorWI5', 'prior_felChar', 'prior_guilt', 'onePrior', 'threePriors'])
+control2 = "+".join(['day', 'day2', 'bailDate', 't1', 't2', 't3', 't4', 't5'])
+
+#formulas used in the OLS
+min_formula = "guilt ~ jail3 + " + control2
+max_formula = """guilt ~ jail3 + possess + robbery + DUI1st + drugSell + 
+                aggAss + {demo} + {prior} + {off} + {control2}""".format(demo=demo,
+                                                                        prior=prior,
+                                                                        off=off,
+                                                                        control2=control2)
+```
+
+]
+
+.panel[.panel-name[stata Code]
+
+```
+global judge_pre judge_pre_1 judge_pre_2 judge_pre_3 judge_pre_4 judge_pre_5 judge_pre_6 judge_pre_7 judge_pre_8
+global demo black age male white 
+global off      fel mis sum F1 F2 F3 F M1 M2 M3 M 
+global prior priorCases priorWI5 prior_felChar  prior_guilt onePrior threePriors
+global control2     day day2 day3  bailDate t1 t2 t3 t4 t5 t6
+```
+
+]
+]
+]
+
+---
+## OLS Regression
+
+.scroll-output[
+.panelset[
+.panel[.panel-name[R Code]
+
+
+``` r
+#max variables and min variables
+regressions &lt;- list(
+  "Min OLS" = lm_robust(min_formula, data = judge),
+  "Max OLS" = lm_robust(max_formula, data = judge)
+)
+
+cm &lt;- c('guilt'    = ' Index',
+        'jail3'    = 'Jail',
+        '(Intercept)'    = 'Intercept')
+f1 &lt;- function(x) format(round(x, 3), big.mark=".")
+f2 &lt;- function(x) format(round(x, 0), big.mark=",")
+
+gm &lt;- list(
+  list(raw = "nobs", clean = "Observations", fmt = f2)
+  )
+
+ols_tab  &lt;- modelsummary(regressions, coef_map = cm,
+                    output = "kableExtra",
+                   stars = c(`***` = 0.01, `**` = 0.05, `*` = 0.1),
+                   fmt = f1,
+                   gof_map = gm,  
+                   escape = F
+                    )
+```
+]
+
+.panel[.panel-name[Python Code]
+
+
+``` python
+#max variables and min variables
+* min_ols = sm.OLS.from_formula(min_formula, data = judge).fit()
+* max_ols = sm.OLS.from_formula(max_formula, data = judge).fit()
+print("OLS")
+Stargazer([min_ols, max_ols])
+```
+
+]
+
+.panel[.panel-name[stata Code]
+
+```
+# Naive OLS
+# minimum controls
+reg guilt jail3 $control2, robust
+# maximum controls
+* reg guilt jail3 possess robbery DUI1st drugSell aggAss $demo $prior $off  $control2 , robust
+
+```
+
+]
+]
+]
+
+---
+## OLS Regression
+
+<div id="uzylcmeagu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#uzylcmeagu table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#uzylcmeagu thead, #uzylcmeagu tbody, #uzylcmeagu tfoot, #uzylcmeagu tr, #uzylcmeagu td, #uzylcmeagu th {
+  border-style: none;
+}
+
+#uzylcmeagu p {
+  margin: 0;
+  padding: 0;
+}
+
+#uzylcmeagu .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#uzylcmeagu .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#uzylcmeagu .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#uzylcmeagu .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#uzylcmeagu .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#uzylcmeagu .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#uzylcmeagu .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#uzylcmeagu .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#uzylcmeagu .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#uzylcmeagu .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#uzylcmeagu .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#uzylcmeagu .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#uzylcmeagu .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#uzylcmeagu .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#uzylcmeagu .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#uzylcmeagu .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#uzylcmeagu .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#uzylcmeagu .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#uzylcmeagu .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uzylcmeagu .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#uzylcmeagu .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#uzylcmeagu .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#uzylcmeagu .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uzylcmeagu .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#uzylcmeagu .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#uzylcmeagu .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#uzylcmeagu .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uzylcmeagu .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#uzylcmeagu .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#uzylcmeagu .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#uzylcmeagu .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#uzylcmeagu .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#uzylcmeagu .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uzylcmeagu .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#uzylcmeagu .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uzylcmeagu .gt_left {
+  text-align: left;
+}
+
+#uzylcmeagu .gt_center {
+  text-align: center;
+}
+
+#uzylcmeagu .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#uzylcmeagu .gt_font_normal {
+  font-weight: normal;
+}
+
+#uzylcmeagu .gt_font_bold {
+  font-weight: bold;
+}
+
+#uzylcmeagu .gt_font_italic {
+  font-style: italic;
+}
+
+#uzylcmeagu .gt_super {
+  font-size: 65%;
+}
+
+#uzylcmeagu .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#uzylcmeagu .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#uzylcmeagu .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#uzylcmeagu .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#uzylcmeagu .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#uzylcmeagu .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#uzylcmeagu .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#uzylcmeagu .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#uzylcmeagu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=" "> </th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Min OLS">Min OLS</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Max OLS">Max OLS</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers=" " class="gt_row gt_left">Jail</td>
+<td headers="Min OLS" class="gt_row gt_center">-0.001</td>
+<td headers="Max OLS" class="gt_row gt_center">0.029***</td></tr>
+    <tr><td headers=" " class="gt_row gt_left"></td>
+<td headers="Min OLS" class="gt_row gt_center">(0.002)</td>
+<td headers="Max OLS" class="gt_row gt_center">(0.002)</td></tr>
+    <tr><td headers=" " class="gt_row gt_left">Intercept</td>
+<td headers="Min OLS" class="gt_row gt_center">-0.413***</td>
+<td headers="Max OLS" class="gt_row gt_center">-0.549***</td></tr>
+    <tr><td headers=" " class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;"></td>
+<td headers="Min OLS" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;">(0.128)</td>
+<td headers="Max OLS" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;">(0.121)</td></tr>
+    <tr><td headers=" " class="gt_row gt_left">Observations</td>
+<td headers="Min OLS" class="gt_row gt_center">331,971</td>
+<td headers="Max OLS" class="gt_row gt_center">331,971</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="3">* p &lt; 0.1, ** p &lt; 0.05, *** p &lt; 0.01</td>
+    </tr>
+  </tfoot>
+  
+</table>
+</div>
+
+---
+## 2SLS Regression
+
+.scroll-output[
+.panelset[
+.panel[.panel-name[R Code]
+
+
+``` r
+#--- Instrumental Variables Estimations
+#-- 2sls main results
+#- Min and Max Control formulas
+min_formula &lt;- as.formula(paste("guilt ~ ", control2, " | 0 | (jail3 ~ 0 +", judge_pre, ")"))
+max_formula &lt;- as.formula(paste("guilt ~", demo, "+ possess +", prior, "+ robbery +", 
+                                off, "+ DUI1st +", control2, "+ drugSell + aggAss | 0 | (jail3 ~ 0 +", judge_pre, ")"))
+#2sls for min and max
+min_iv &lt;- felm(min_formula, data = judge)
+summary(min_iv)
+max_iv &lt;- felm(max_formula, data = judge)
+summary(max_iv)
+
+iv_regressions &lt;- list(
+  "Min IV" = felm(min_formula, data = judge),
+  "Max IV" = felm(max_formula, data = judge)
+)
+
+cm &lt;- c(
+        'jail3(fit)'    = 'Jail',
+        '(Intercept)'    = 'Intercept')
+f1 &lt;- function(x) format(round(x, 3), big.mark=".")
+f2 &lt;- function(x) format(round(x, 0), big.mark=",")
+
+gm &lt;- list(
+  list(raw = "nobs", clean = "Observations", fmt = f2)
+  )
+
+iv_tab  &lt;- modelsummary(iv_regressions, coef_map = cm,
+                   output = "markdown",
+                   stars = c(`***` = 0.01, `**` = 0.05, `*` = 0.1),
+                   fmt = f1,
+                   gof_map = gm,  
+                   escape = F
+                   )
+```
+]
+
+.panel[.panel-name[Python Code]
+
+
+``` python
+#--- Instrumental Variables Estimations
+#-- 2sls main results
+#- Min and Max Control formulas
+
+min_formula = "guilt ~ {control2} + [jail3 ~ {judge_pre}]".format(control2=control2, judge_pre=judge_pre)
+max_formula = """guilt ~ {demo} + possess + {prior} + robbery + {off} + DUI1st + {control2} + drugSell + aggAss +
+                    [jail3 ~ {judge_pre}]""".format(demo=demo,
+                                                    prior=prior,
+                                                    off=off,
+                                                    control2=control2,
+                                                   judge_pre=judge_pre)
+
+min_iv = IV2SLS.from_formula(min_formula, data = judge).fit()
+max_iv = IV2SLS.from_formula(max_formula, data = judge).fit()
+
+
+print("IV")
+min_iv.summary
+max_iv.summary
+```
+
+]
+
+.panel[.panel-name[stata Code]
+
+```
+# First stage
+reg jail3 $judge_pre $control2, robust
+reg jail3 possess robbery DUI1st drugSell aggAss $demo $prior $off  $control2 $judge_pre, robust
+
+
+
+# Instrumental variables estimation
+# 2sls main results
+# minimum controls
+ivregress 2sls guilt (jail3= $judge_pre) $control2, robust first
+# maximum controls
+ivregress 2sls guilt (jail3= $judge_pre) possess robbery DUI1st drugSell aggAss $demo $prior $off $control2 , robust first
+```
+
+]
+]
+]
+
+---
+## 2SLS Regression
+
+<div id="qooktldgpe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qooktldgpe table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#qooktldgpe thead, #qooktldgpe tbody, #qooktldgpe tfoot, #qooktldgpe tr, #qooktldgpe td, #qooktldgpe th {
+  border-style: none;
+}
+
+#qooktldgpe p {
+  margin: 0;
+  padding: 0;
+}
+
+#qooktldgpe .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#qooktldgpe .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#qooktldgpe .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#qooktldgpe .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#qooktldgpe .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qooktldgpe .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qooktldgpe .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qooktldgpe .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#qooktldgpe .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#qooktldgpe .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#qooktldgpe .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#qooktldgpe .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#qooktldgpe .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#qooktldgpe .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#qooktldgpe .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#qooktldgpe .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#qooktldgpe .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#qooktldgpe .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#qooktldgpe .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qooktldgpe .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#qooktldgpe .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#qooktldgpe .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#qooktldgpe .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qooktldgpe .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#qooktldgpe .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#qooktldgpe .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qooktldgpe .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qooktldgpe .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#qooktldgpe .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qooktldgpe .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#qooktldgpe .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qooktldgpe .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qooktldgpe .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qooktldgpe .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qooktldgpe .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qooktldgpe .gt_left {
+  text-align: left;
+}
+
+#qooktldgpe .gt_center {
+  text-align: center;
+}
+
+#qooktldgpe .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#qooktldgpe .gt_font_normal {
+  font-weight: normal;
+}
+
+#qooktldgpe .gt_font_bold {
+  font-weight: bold;
+}
+
+#qooktldgpe .gt_font_italic {
+  font-style: italic;
+}
+
+#qooktldgpe .gt_super {
+  font-size: 65%;
+}
+
+#qooktldgpe .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#qooktldgpe .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#qooktldgpe .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#qooktldgpe .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#qooktldgpe .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#qooktldgpe .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#qooktldgpe .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#qooktldgpe .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#qooktldgpe div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=" "> </th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Min IV">Min IV</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Max IV">Max IV</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers=" " class="gt_row gt_left">Jail</td>
+<td headers="Min IV" class="gt_row gt_center">0.151**</td>
+<td headers="Max IV" class="gt_row gt_center">0.183***</td></tr>
+    <tr><td headers=" " class="gt_row gt_left"></td>
+<td headers="Min IV" class="gt_row gt_center">(0.065)</td>
+<td headers="Max IV" class="gt_row gt_center">(0.064)</td></tr>
+    <tr><td headers=" " class="gt_row gt_left">Intercept</td>
+<td headers="Min IV" class="gt_row gt_center">-0.416***</td>
+<td headers="Max IV" class="gt_row gt_center">-0.515***</td></tr>
+    <tr><td headers=" " class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;"></td>
+<td headers="Min IV" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;">(0.129)</td>
+<td headers="Max IV" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;">(0.123)</td></tr>
+    <tr><td headers=" " class="gt_row gt_left">Observations</td>
+<td headers="Min IV" class="gt_row gt_center">331,971</td>
+<td headers="Max IV" class="gt_row gt_center">331,971</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="3">* p &lt; 0.1, ** p &lt; 0.05, *** p &lt; 0.01</td>
+    </tr>
+  </tfoot>
+  
+</table>
+</div>
+---
+## JIVE Estimator
+
+### Stevenson (2018) main specification is the jacknife instrumental variable estimator---JIVE---(Angrist, Imbens, and Krueger 1999)
+
+### JIVE attempts to eliminmate the bias from finite sample bias in the 2SLS estimator
+
+### JIVE is also known as the "leave-one-out" estimator which estimates all the observations except for the `\(i\)`-th observation
+
+---
+## JIVE Estimator
+
+.scroll-output[
+.panelset[
+.panel[.panel-name[R Code]
+
+
+``` r
+#-- JIVE main results
+#- minimum controls
+y &lt;- judge %&gt;%
+  pull(guilt)
+
+X_min &lt;- judge %&gt;%
+  mutate(bailDate = as.numeric(bailDate)) %&gt;%
+  select(jail3, day, day2, t1, t2, t3, t4, t5, bailDate) %&gt;%
+  model.matrix(data = .,~.)
+
+Z_min &lt;- judge %&gt;%
+  mutate(bailDate = as.numeric(bailDate)) %&gt;%
+  select(-judge_pre_8) %&gt;%
+  select(starts_with("judge_pre"), day, day2, t1, t2, t3, t4, t5, bailDate) %&gt;%
+  model.matrix(data = .,~.)
+
+jive.est(y = y, X = X_min, Z = Z_min)
+
+#- maximum controls
+X_max &lt;- judge %&gt;%
+  mutate(bailDate = as.numeric(bailDate)) %&gt;%
+  select(jail3, white, age, male, black,
+         possess, robbery, prior_guilt,
+         prior_guilt, onePrior, priorWI5, prior_felChar, priorCases,
+         DUI1st, drugSell, aggAss, fel, mis, sum,
+         threePriors,
+         F1, F2, F3,
+         M, M1, M2, M3,
+         day, day2, bailDate, 
+         t1, t2, t3, t4, t5) %&gt;%
+  model.matrix(data = .,~.)
+
+Z_max &lt;- judge %&gt;%
+  mutate(bailDate = as.numeric(bailDate)) %&gt;%
+  select(-judge_pre_8) %&gt;%
+  select(starts_with("judge_pre"), white, age, male, black,
+         possess, robbery, prior_guilt,
+         prior_guilt, onePrior, priorWI5, prior_felChar, priorCases,
+         DUI1st, drugSell, aggAss, fel, mis, sum,
+         threePriors,
+         F1, F2, F3,
+         M, M1, M2, M3,
+         day, day2, bailDate, 
+         t1, t2, t3, t4, t5) %&gt;%
+  model.matrix(data = .,~.)
+
+JIVE_results &lt;- jive.est(y = y, X = X_max, Z = Z_max)
+```
+]
+
+.panel[.panel-name[Python Code]
+
+
+``` python
+#-- JIVE main results
+#- minimum controls
+
+from rpy2 import robjects
+from rpy2.robjects import pandas2ri
+from rpy2.robjects.packages import importr
+pandas2ri.activate()
+SteinIV = importr('SteinIV')
+
+y = judge['guilt']
+X_min = judge[['jail3', 'day', 'day2', 't1', 't2', 't3', 't4', 't5', 'bailDate']]
+X_min['intercept'] = 1
+
+Z_min = judge[judge_pre.split('+') + ['day', 'day2', 't1', 't2', 't3', 't4', 't5', 'bailDate']]
+Z_min['intercept'] = 1
+
+
+y = robjects.globalenv['y'] = y
+X_min = robjects.globalenv['X_min'] = np.array(X_min)
+Z_min = robjects.globalenv['Z_min'] = np.array(Z_min)
+
+SteinIV.jive_est(y = y, X=X_min, Z=Z_min)
+
+#- maximum controls
+X_max = judge[['jail3', 'white', 'age', 'male', 'black',
+         'possess', 'robbery', 
+         'prior_guilt', 'onePrior', 'priorWI5', 'prior_felChar', 'priorCases',
+         'DUI1st', 'drugSell', 'aggAss', 'fel', 'mis', 'sum',
+         'threePriors',
+         'F1', 'F2', 'F3',
+         'M', 'M1', 'M2', 'M3',
+         'day', 'day2', 'bailDate', 
+         't1', 't2', 't3', 't4', 't5']]
+X_max['intercept'] = 1
+
+Z_max = judge[judge_pre.split('+') + ['white', 'age', 'male', 'black',
+         'possess', 'robbery', 
+         'prior_guilt', 'onePrior', 'priorWI5', 'prior_felChar', 'priorCases',
+         'DUI1st', 'drugSell', 'aggAss', 'fel', 'mis', 'sum',
+         'threePriors',
+         'F1', 'F2', 'F3',
+         'M', 'M1', 'M2', 'M3',
+         'day', 'day2', 'bailDate', 
+         't1', 't2', 't3', 't4', 't5']]
+Z_max['intercept'] = 1
+X_max = robjects.globalenv['X_max'] = np.array(X_max)
+Z_max = robjects.globalenv['Z_max'] = np.array(Z_max)
+
+
+SteinIV.jive_est(y = y, X = X_max, Z = Z_max)
+```
+
+]
+
+.panel[.panel-name[stata Code]
+
+```
+# JIVE main results
+# jive can be installed using: net from https://www.stata-journal.com/software/sj6-3/
+# net install st0108
+
+# minimum controls
+jive guilt (jail3= $judge_pre) $control2, robust
+# maximum controls
+jive guilt (jail3= $judge_pre) possess robbery DUI1st drugSell aggAss $demo $prior $off $control2 , robust
+```
+
+]
+]
+]
+
+---
+## JIVE Regression
+
+&lt;table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;border-bottom: 0;"&gt;
+&lt;caption&gt;OLS and IV Estimates of Detention on Guilty Plea&lt;/caption&gt;
+ &lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="empty-cells: hide;border-bottom:hidden;" colspan="1"&gt;&lt;/th&gt;
+&lt;th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"&gt;&lt;div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; "&gt;OLS&lt;/div&gt;&lt;/th&gt;
+&lt;th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"&gt;&lt;div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; "&gt;2SLS&lt;/div&gt;&lt;/th&gt;
+&lt;th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"&gt;&lt;div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; "&gt;JIVE&lt;/div&gt;&lt;/th&gt;
+&lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Model: &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; OLS &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt;  &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; 2SLS &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt;  &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; JIVE &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt;  &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Detention &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.001 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.029*** &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.151** &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.186*** &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.162** &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.212*** &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; (0.002) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; (0.002) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; (0.129) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; (0.123) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; (0.07) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; (0.076) &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; N &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 331971 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 331971 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 331971 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 331971 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 331971 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 331971 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Mean guilt &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.49 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.49 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.49 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.49 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.49 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.49 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;tfoot&gt;
+&lt;tr&gt;&lt;td style="padding: 0; " colspan="100%"&gt;&lt;span style="font-style: italic;"&gt;Note: &lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="padding: 0; " colspan="100%"&gt;
+&lt;sup&gt;&lt;/sup&gt; First model includes controls for time; second model controls for characteristics of the defendant. Outcome is guilty plea. Heteroskedastic robust standard errors in parenthesis. * p &amp;lt; 0.10, ** p &amp;lt; 0.05, *** p &amp;lt; 0.01&lt;/td&gt;&lt;/tr&gt;
+&lt;/tfoot&gt;
+&lt;/table&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
