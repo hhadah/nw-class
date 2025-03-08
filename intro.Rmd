@@ -51,7 +51,7 @@ opts_chunk$set(
   fig.height=4, fig.width=6,
   out.width="748px", out.length="520.75px",
   dpi=300, #fig.path='Figs/',
-  cache=F#, echo=F, warning=F, message=F
+  cache=T#, echo=F, warning=F, message=F
   )
 ```
 
@@ -143,7 +143,6 @@ xaringanExtra::use_panelset()
 
 ---
 class: segue-yellow
-background-image: url("assets/TulaneLogo.svg")
 background-size: 20%
 background-position: 95% 95%
 
@@ -239,7 +238,6 @@ grid.raster(img1)
 
 ---
 class: segue-yellow
-background-image: url("assets/TulaneLogo.svg")
 background-size: 20%
 background-position: 95% 95%
 
@@ -284,7 +282,6 @@ task force.” Journal of Public Economics, 164: 1–18.
 
 ---
 class: segue-yellow
-background-image: url("assets/TulaneLogo.svg")
 background-size: 20%
 background-position: 95% 95%
 
@@ -337,7 +334,6 @@ background-position: 95% 95%
 
 ---
 class: segue-yellow
-background-image: url("assets/TulaneLogo.svg")
 background-size: 20%
 background-position: 95% 95%
 
@@ -429,7 +425,6 @@ additional prevention will exceed the marginal benefit of an additional reductio
 
 ---
 class: segue-yellow
-background-image: url("assets/TulaneLogo.svg")
 background-size: 20%
 background-position: 95% 95%
 
@@ -462,10 +457,6 @@ grid.raster(img2)
 - Models choice between criminal vs non-criminal activity.
 
 - Explains how criminal activity can be related to individual economic opportunities and to income inequality.
-
-  - A simplified “rational criminal” model is presented in the textbook and in these slides.
-
-  - Chapter 10.1 to 10.2.2 (up to page 214), and 10.3.4 (page 220)
 
 - This model is not supposed to explain all criminal behavior, but rather I am summarizing a simple version of this model so you have a sense of the types of models that economists often construct to explore how factors such as economic opportunity affect criminal behavior.
 
@@ -777,7 +768,6 @@ grid.raster(img5)
 
 ---
 class: segue-yellow
-background-image: url("assets/TulaneLogo.svg")
 background-size: 20%
 background-position: 95% 95%
 
@@ -820,7 +810,6 @@ The hypothesis that drug prohibition generates violence, however, is generally c
 
 ---
 class: segue-yellow
-background-image: url("assets/TulaneLogo.svg")
 background-size: 20%
 background-position: 95% 95%
 
@@ -901,7 +890,6 @@ grid.raster(img18)
 
 ---
 class: segue-yellow
-background-image: url("assets/TulaneLogo.svg")
 background-size: 20%
 background-position: 95% 95%
 
@@ -956,11 +944,11 @@ $$
 
 where:
 - $\hat{D}_i$ is the predicted probability of detention from the first stage,
-- $\alpha_1 $is the causal effect of detention on case outcome.
+- $\alpha_1$ is the causal effect of detention on case outcome.
 
 For validity:
 1. **Relevance**:  $Z_i$  strongly predicts  $D_i$  ($\pi_1 \neq 0$).
-2. **Exogeneity**: $Z_i$ affects $Y_i$ only through $D_i $ and not through other channels.
+2. **Exogeneity**: $Z_i$ affects $Y_i$ only through $D_i$ and not through other channels.
 
 ---
 ## We will use data from Stevenson (2018) to apply this method
@@ -1664,3 +1652,21 @@ kable(results_table,
   add_header_above(c(" " = 1, "OLS" = 2, "2SLS" = 2, "JIVE" = 2)) %>%
   footnote(general = "First model includes controls for time; second model controls for characteristics of the defendant. Outcome is guilty plea. Heteroskedastic robust standard errors in parenthesis. * p < 0.10, ** p < 0.05, *** p < 0.01")
 ```
+
+---
+## Homework for Next Class
+
+### Find a crime paper with a dataset to use
+
+--
+#### I suggest finding papers from the American Economic Review since they tend to publish papers with data
+
+### Use the code that I gave in the class as a reference
+
+### Replicate the results of the paper
+
+### Write a report with nice tables like the ones I presented in the class
+
+### Work in groups of 5-8
+
+### Understand the paper and the replication because you will present it in the another class afterward

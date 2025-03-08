@@ -15,7 +15,7 @@ To specify the margin of the first title h1
   margin-bottom: 10px;
 }
 .remark-slide-content > h2:first-of-type {
-  color: #285c4d;
+  color: #4E2A84;
   margin-top: 5px;
   margin-bottom: 10px;
 }
@@ -60,7 +60,7 @@ To specify the margin of the first title h1
 
 /* Change default inverse background colour */
 .inverse {
-  background-color: #0148A4;
+  background-color: #4E2A84;
   text-shadow: 0 0 20px #333;
 }
 .inverse .remark-slide-number {
@@ -75,7 +75,7 @@ To specify the margin of the first title h1
   background-color: #CC9900;
 }
 .tulane-green {
-  background-color: #285c4d;
+  background-color: #4E2A84;
   color: white;
 }
 .tulane-crawfest {
@@ -87,7 +87,7 @@ To specify the margin of the first title h1
 .segue {
   text-align: center;
   vertical-align: middle;
-  background-color: #0148A4;
+  background-color: #4E2A84;
   color: #FFFFFF;  /* Updated color to white */
   text-shadow: 0 0 20px #333;
 }
@@ -98,7 +98,7 @@ To specify the margin of the first title h1
 .segue-green {
   text-align: center;
   vertical-align: middle;
-  background-color: #285c4d;
+  background-color: #4E2A84;
   color: #FFFFFF;  /* Updated color to white */
   text-shadow: 0 0 20px #333;
 }
@@ -109,7 +109,7 @@ To specify the margin of the first title h1
 .segue-yellow {
   text-align: center;
   vertical-align: middle;
-  background-color: #FFB800;
+  background-color: #FFC520;
   color: #FFFFFF;  /* Updated color to white */
   text-shadow: 0 0 2px #333;
 }
@@ -358,18 +358,18 @@ slides > slide {
   /*
   background-position: 10% 90%, 100% 50%;
   background-size: 160px, 50% 100%;
-  background-color: #285c4d;
+  background-color: #4E2A84;
   /*padding-left: 100px;   delete this for 4:3 aspect ratio */
 /*
 }
 */
  
 .title-slide {
-  background-image: url(TulaneLogo-black.svg);
+  /* background-image: url(TulaneLogo-black.svg); */
   /* background-image: url(https://sydney.edu.au/etc/designs/corporate-commons/bower_components/corporate-frontend/dist/assets/img/TulaneLogo.svg); */
   background-position: 10% 90%;
   background-size: 320px;
-  background-color: #285c4d;
+  background-color: #4E2A84;
   text-align:left;
   vertical-align: top;
   text-shadow: none;
@@ -423,13 +423,13 @@ blockquote, .blockquote {
   margin-bottom: 0.2em;
   margin-left: 5px;
   margin-right: 5px;
-  border-left: solid 10px #0148A4;
-  border-top: solid 2px #0148A4;
-  border-bottom: solid 2px #0148A4;
-  border-right: solid 2px #0148A4;
+  border-left: solid 10px #4E2A84;
+  border-top: solid 2px #4E2A84;
+  border-bottom: solid 2px #4E2A84;
+  border-right: solid 2px #4E2A84;
   box-shadow: 0 0 6px rgba(0,0,0,0.5);
-  /* background-color: #285c4d; */
-  color: #285c4d;
+  /* background-color: #4E2A84; */
+  color: #4E2A84;
   padding: 0.5em;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -477,7 +477,7 @@ Masterbrand charcoal #424242;
 C=0 M=0 Y=0 K=90 
 R=66 G=66 B=66 
 
-Masterbrand red #285c4d;
+Masterbrand red #4E2A84;
 C=0 M=0 Y=0 K=90
 R=66 G=66 B=66 
 
@@ -493,7 +493,7 @@ Accent yellow #FFB800
 C=0 M=25 Y=98 K=0
 R=255 G=184 B=0 
 
-Accent blue #0148A4
+Accent blue #4E2A84
 C=100 M=61 Y=0 K=0
 R=1 G=72 B=164 
 
