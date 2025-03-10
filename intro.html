@@ -4,7 +4,7 @@
     <title>The Economics of Crime</title>
     <meta charset="utf-8" />
     <meta name="author" content="Hussain Hadah (he/him)" />
-    <meta name="date" content="2025-03-08" />
+    <meta name="date" content="2025-03-09" />
     <script src="intro_files/header-attrs/header-attrs.js"></script>
     <link href="intro_files/remark-css/default.css" rel="stylesheet" />
     <link href="intro_files/panelset/panelset.css" rel="stylesheet" />
@@ -37,15 +37,15 @@ class: center, middle, inverse, title-slide
 ### Hussain Hadah (he/him)
 ]
 .date[
-### 08 March 2025
+### 09 March 2025
 ]
 
 ---
 
 layout: true
-&lt;div style="position: absolute;left:20px;bottom:5px;color:black;font-size: 12px;"&gt;Hussain Hadah (he/him) (Tulane) |  | 08 March 2025&lt;/div&gt;
+&lt;div style="position: absolute;left:20px;bottom:5px;color:black;font-size: 12px;"&gt;Hussain Hadah (he/him) (Tulane) |  | 09 March 2025&lt;/div&gt;
 
-&lt;!---  | 08 March 2025--&gt;
+&lt;!---  | 09 March 2025--&gt;
 
 ---
 
@@ -242,7 +242,6 @@ background-position: 95% 95%
 ## Empirical Studies on How Police Affect Crime
 
 - In this course we will cover some neat empirical research articles that investigate how police affect crime using different experimental or “quasi-experimental” methods.
-- These are the readings for the Jigsaw activity
 - **Levitt, Steven D.** 1997. “Using Electoral Cycles in Police Hiring to Estimate the Effect of Police on
 Crime.” American Economic Review, 87(3): 270–290.
 - **Sullivan, Christopher M, and Zachary P. O’Keeffe.** 2017. “Evidence that curtailing proactive
@@ -341,9 +340,6 @@ balances the cost and benefits of policy actions.
 
 - Concepts like marginal costs come into play with cost-benefit analysis:
 
-&gt; “The optimal amount of crime is unlikely to be zero, since at some point the marginal costs of
-additional prevention will exceed the marginal benefit of an additional reduction in crime.” (p.
-8)
 
 ---
 class: segue-yellow
@@ -746,7 +742,7 @@ background-position: 95% 95%
 ---
 ## Endogenous Relationship Between Pre-Trial Detention and Case Outcome
 
-We want to estimate the effect of pre-trial detention (\(D_i\)) on case outcome (\(Y_i\)). The naïve OLS model is:
+We want to estimate the effect of pre-trial detention `\((D_i)\)` on case outcome `\((Y_i)\)`. The naïve OLS model is:
 
 $$
 Y_i = \beta_0 + \beta_1 D_i + X_i \gamma + \varepsilon_i
@@ -767,7 +763,7 @@ $$
 ---
 ## Using Judge Stringency as an Instrument (2SLS Approach)
 
-To address endogeneity, we use an instrumental variable (IV): judge stringency (\(Z_i\)), which measures the propensity of a randomly assigned judge to detain defendants.
+To address endogeneity, we use an instrumental variable (IV): judge stringency `\((Z_i)\)`, which measures the propensity of a randomly assigned judge to detain defendants.
 
 ### First Stage:
 

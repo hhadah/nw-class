@@ -337,7 +337,6 @@ grid.raster(img2)
 ## Empirical Studies on How Police Affect Crime
 
 - In this course we will cover some neat empirical research articles that investigate how police affect crime using different experimental or “quasi-experimental” methods.
-- These are the readings for the Jigsaw activity
 - **Levitt, Steven D.** 1997. “Using Electoral Cycles in Police Hiring to Estimate the Effect of Police on
 Crime.” American Economic Review, 87(3): 270–290.
 - **Sullivan, Christopher M, and Zachary P. O’Keeffe.** 2017. “Evidence that curtailing proactive
@@ -436,9 +435,6 @@ balances the cost and benefits of policy actions.
 
 - Concepts like marginal costs come into play with cost-benefit analysis:
 
-> “The optimal amount of crime is unlikely to be zero, since at some point the marginal costs of
-additional prevention will exceed the marginal benefit of an additional reduction in crime.” (p.
-8)
 
 ---
 class: segue-yellow
@@ -903,7 +899,7 @@ background-position: 95% 95%
 ---
 ## Endogenous Relationship Between Pre-Trial Detention and Case Outcome
 
-We want to estimate the effect of pre-trial detention (\(D_i\)) on case outcome (\(Y_i\)). The naïve OLS model is:
+We want to estimate the effect of pre-trial detention $(D_i)$ on case outcome $(Y_i)$. The naïve OLS model is:
 
 $$
 Y_i = \beta_0 + \beta_1 D_i + X_i \gamma + \varepsilon_i
@@ -924,7 +920,7 @@ $$
 ---
 ## Using Judge Stringency as an Instrument (2SLS Approach)
 
-To address endogeneity, we use an instrumental variable (IV): judge stringency (\(Z_i\)), which measures the propensity of a randomly assigned judge to detain defendants.
+To address endogeneity, we use an instrumental variable (IV): judge stringency $(Z_i)$, which measures the propensity of a randomly assigned judge to detain defendants.
 
 ### First Stage:
 
